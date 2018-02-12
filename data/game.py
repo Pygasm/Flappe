@@ -1,5 +1,5 @@
 import pygame
-import public
+import data.public as public
 
 pygame.display.set_caption('Flappe')
 

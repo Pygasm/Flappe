@@ -15,3 +15,7 @@ SHEIGHT = 600
 # Variable
 screen = pygame.display.set_mode((SWIDTH, SHEIGHT))
 clock = pygame.time.Clock()
+
+all_sprites = pygame.sprite.Group()
+enemies = pygame.sprite.Group()
+floors = pygame.sprite.Group()
