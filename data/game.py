@@ -5,8 +5,10 @@ import data.functions as functions
 
 pygame.display.set_caption('Flappe')
 
+
 def main():
 	ticks = 0
+	flappe = sprites.Flappe((50, 250), public.all_sprites)
 	functions.generate_floors()
 
 	while True:
@@ -18,9 +20,7 @@ def main():
 		public.all_sprites.update()
 
 		public.screen.fill(public.BLUE)
-		for sprite in public.all_sprites:
-			if sprite.type == 'Floor':
-				sprite.draw()
+		public.all_sprites.draw(public.screen)
 
 		pygame.display.flip()
 		public.clock.tick(public.FPS)
