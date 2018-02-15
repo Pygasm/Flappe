@@ -1,11 +1,10 @@
 import pygame
 import sys
 
-if __name__ == '__main__':
-	sys.path.insert(0, './data/')
+sys.path.insert(0, './data/')
+import game
 
-	import game
-	
+if __name__ == '__main__':
 	pygame.init()
 	game.main()
 	pygame.quit()
