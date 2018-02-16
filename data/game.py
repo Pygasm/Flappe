@@ -15,12 +15,18 @@ def main():
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				return 1
+			elif event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_SPACE:
+					flappe.flap()
 
 		functions.update_floors()
 		public.all_sprites.update()
 
 		public.screen.fill(public.BLUE)
-		public.all_sprites.draw(public.screen)
+			
+		l = sorted(public.all_sprites.sprites(), key=lambda x: x.type)
+		for sprite in l:
+			sprite.draw()
 
 		pygame.display.flip()
 		public.clock.tick(public.FPS)

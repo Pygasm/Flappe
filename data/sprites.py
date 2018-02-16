@@ -15,18 +15,25 @@ class Flappe(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect(center=pos)
 		self.pos = pygame.math.Vector2(pos)
 		self.vel = pygame.math.Vector2((0, 0))
+		self.rotation = 0
 		self.type = 1
 
 	def update(self):
 		self.vel.y += public.gravity
 		self.pos += self.vel
 		self.rect.center = self.pos
+		self.rotation -= self.vel.y
+
+		self.image = pygame.transform.rotate(dictionaries.MEDIA['flappe_texture'], -self.vel.y * 5)
 
 		if self.pos.y > public.SHEIGHT:
 			self.kill()
 
 	def draw(self):
 		public.screen.blit(self.image, self.rect)
+
+	def flap(self):
+		self.vel.y = -4
 
 
 class Floor(pygame.sprite.Sprite):
