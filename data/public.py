@@ -16,6 +16,7 @@ screen = pygame.display.set_mode((SWIDTH, SHEIGHT))
 clock = pygame.time.Clock()
 objvel = 3
 gravity = 0.1
+pipe_ticks = 0
 spawntable = [0, 40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560]
 all_sprites = pygame.sprite.Group()
 enemies = pygame.sprite.Group()

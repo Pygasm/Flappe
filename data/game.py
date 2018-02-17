@@ -10,6 +10,7 @@ def main():
 	ticks = 0
 	flappe = sprites.Flappe((50, 250), public.all_sprites)
 	functions.generate_floors()
+	functions.generate_pipes()
 
 	while True:
 		for event in pygame.event.get():
@@ -20,6 +21,7 @@ def main():
 					flappe.flap()
 
 		functions.update_floors()
+		functions.update_pipes()
 		public.all_sprites.update()
 
 		public.screen.fill(public.BLUE)
