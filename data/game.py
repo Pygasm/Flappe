@@ -17,7 +17,7 @@ def main():
 			if event.type == pygame.QUIT:
 				return 1
 			elif event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_SPACE:
+				if event.key == pygame.K_SPACE and not flappe.toggle:
 					flappe.flap()
 
 		functions.update_floors()

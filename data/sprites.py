@@ -1,11 +1,11 @@
 import pygame
 import data.public as public
-import data.dictionaries as dictionaries
+import data.media as media
 
 # 0: Clouds
 # 1: Player
 # 2: Pipes
-# 3: Clouds
+# 3: Floors
 # 4: Checkpoints (Not drawn)
 
 
@@ -13,10 +13,11 @@ class Flappe(pygame.sprite.Sprite):
 	def __init__(self, pos, *groups):
 		super().__init__(*groups)
 
-		self.image = dictionaries.MEDIA['flappe_texture']
+		self.image = media.MEDIA['flappe_texture']
 		self.rect = self.image.get_rect(center=pos)
 		self.pos = pygame.math.Vector2(pos)
 		self.vel = pygame.math.Vector2((0, 0))
+		self.toggle = False
 		self.rotation = 0
 		self.type = 1
 
@@ -25,11 +26,31 @@ class Flappe(pygame.sprite.Sprite):
 		self.pos += self.vel
 		self.rect.center = self.pos
 		self.rotation -= self.vel.y
-
-		self.image = pygame.transform.rotate(dictionaries.MEDIA['flappe_texture'], -self.vel.y * 5)
+		self.image = pygame.transform.rotate(media.MEDIA['flappe_texture'], -self.vel.y * 5)
 
 		if self.pos.y > public.SHEIGHT:
 			self.kill()
+
+		collided = pygame.sprite.spritecollide(self, public.enemies, False)
+		if not self.toggle:
+			for sprite in collided:
+				if sprite.type == 2 or sprite.type == 3:
+					if self.pos.y < 250:
+						self.vel.y = 0
+						self.toggle = True
+						public.objvel = 0
+						public.gravity = 0.2
+
+					elif self.pos.y > 250:
+						self.vel.y = -2
+						self.toggle = True
+						public.objvel = 0
+						public.gravity = 0.2
+
+				elif sprite.type == 4:
+					sprite.kill()
+					public.points += 1
+					print(public.points)
 
 	def draw(self):
 		public.screen.blit(self.image, self.rect)
@@ -43,10 +64,10 @@ class Pipe(pygame.sprite.Sprite):
 		super().__init__(*groups)
 
 		if state == 0:
-			self.image = dictionaries.MEDIA['pipe_texture']
+			self.image = media.MEDIA['pipe_texture']
 			self.rect = self.image.get_rect(topleft=pos)
 		elif state == 1:
-			self.image = pygame.transform.flip(dictionaries.MEDIA['pipe_texture'], False, True)
+			self.image = pygame.transform.flip(media.MEDIA['pipe_texture'], False, True)
 			self.rect = self.image.get_rect(bottomleft=pos)
 
 		self.pos = pygame.math.Vector2(pos)
@@ -68,9 +89,9 @@ class Floor(pygame.sprite.Sprite):
 		super().__init__(*groups)
 
 		if state == 0:
-			self.image = dictionaries.MEDIA['floor_texture']
+			self.image = media.MEDIA['floor_texture']
 		elif state == 1:
-			self.image = pygame.transform.flip(dictionaries.MEDIA['floor_texture'], False, True)
+			self.image = pygame.transform.flip(media.MEDIA['floor_texture'], False, True)
 
 		self.rect = self.image.get_rect(topleft=pos)
 		self.pos = pygame.math.Vector2(pos)
