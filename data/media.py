@@ -2,8 +2,6 @@ import pygame
 import os
 import glob
 
-pygame.init()
-
 MEDIA = {}
 image_files = glob.glob(os.path.join(os.path.dirname(__file__), 'media', '*.png'))
 audio_files = glob.glob(os.path.join(os.path.dirname(__file__), 'media', '*.wav'))

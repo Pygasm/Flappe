@@ -14,6 +14,7 @@ vels = {
 	2: 0.9,
 }
 
+
 class Cloud(pygame.sprite.Sprite):
 	def __init__(self, pos, state, *groups):
 		super().__init__(*groups)
@@ -65,6 +66,7 @@ class Flappe(pygame.sprite.Sprite):
 						self.vel.y = 0
 					elif sprite.state == 0:
 						self.vel.y = -2
+
 					self.toggle = True
 					public.gravity = 0.2
 					public.objvel = 0
@@ -74,7 +76,6 @@ class Flappe(pygame.sprite.Sprite):
 					sprite.kill()
 					public.points += 1
 					media.MEDIA['pass_sound'].play()
-					print(public.points)
 
 	def draw(self):
 		public.screen.blit(self.image, self.rect)
