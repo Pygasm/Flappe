@@ -11,6 +11,7 @@ def main():
 	flappe = sprites.Flappe((50, 250), public.all_sprites)
 	functions.generate_floors()
 	functions.generate_pipes()
+	functions.generate_clouds()
 
 	while True:
 		for event in pygame.event.get():
@@ -22,6 +23,7 @@ def main():
 
 		functions.update_floors()
 		functions.update_pipes()
+		functions.update_clouds()
 		public.all_sprites.update()
 
 		public.screen.fill(public.BLUE)
