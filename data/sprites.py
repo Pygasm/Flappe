@@ -10,8 +10,8 @@ import data.media as media
 
 vels = {
 	0: 0.2,
-	1: 0.3,
-	2: 0.7,
+	1: 0.5,
+	2: 0.9,
 }
 
 class Cloud(pygame.sprite.Sprite):
@@ -22,7 +22,7 @@ class Cloud(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect(center=pos)
 		self.pos = pygame.math.Vector2(pos)
 		self.vel = vels[state] 
-		self.type = state - 4
+		self.type = state - 3
 
 	def update(self):
 		self.pos.x -= self.vel
@@ -61,29 +61,27 @@ class Flappe(pygame.sprite.Sprite):
 		if not self.toggle:
 			for sprite in collided:
 				if sprite.type == 2 or sprite.type == 3:
-					if self.pos.y < 250:
+					if sprite.state == 1 or self.pos.x < sprite.rect.left:
 						self.vel.y = 0
-						self.toggle = True
-						public.objvel = 0
-						public.gravity = 0.2
-
-					elif self.pos.y > 250:
+					elif sprite.state == 0:
 						self.vel.y = -2
-						self.toggle = True
-						public.objvel = 0
-						public.gravity = 0.2
+					self.toggle = True
+					public.gravity = 0.2
+					public.objvel = 0
+					media.MEDIA['fall_sound'].play()
 
 				elif sprite.type == 4:
-					if self.pos.x > sprite.rect.center[0]:
-						sprite.kill()
-						public.points += 1
-						print(public.points)
+					sprite.kill()
+					public.points += 1
+					media.MEDIA['pass_sound'].play()
+					print(public.points)
 
 	def draw(self):
 		public.screen.blit(self.image, self.rect)
 
 	def flap(self):
 		self.vel.y = -4
+		media.MEDIA['flap_sound'].play()
 
 
 class Pipe(pygame.sprite.Sprite):
@@ -97,6 +95,7 @@ class Pipe(pygame.sprite.Sprite):
 			self.image = pygame.transform.flip(media.MEDIA['pipe_texture'], False, True)
 			self.rect = self.image.get_rect(bottomleft=pos)
 
+		self.state = state
 		self.pos = pygame.math.Vector2(pos)
 		self.type = 2
 
@@ -120,6 +119,7 @@ class Floor(pygame.sprite.Sprite):
 		elif state == 1:
 			self.image = pygame.transform.flip(media.MEDIA['floor_texture'], False, True)
 
+		self.state = state
 		self.rect = self.image.get_rect(topleft=pos)
 		self.pos = pygame.math.Vector2(pos)
 		self.type = 3
@@ -139,7 +139,7 @@ class Checkpoint(pygame.sprite.Sprite):
 	def __init__(self, pos, *groups):
 		super().__init__(*groups)
 		
-		self.image = pygame.Surface((50, 100))
+		self.image = pygame.Surface((1, 100))
 		self.rect = self.image.get_rect(topleft=pos)
 		self.pos = pygame.math.Vector2(pos)
 		self.type = 4

@@ -16,9 +16,9 @@ def update_floors():
 
 
 def generate_pipes():
-	checkpoint = sprites.Checkpoint((550, random.randint(50, 400)), public.all_sprites, public.enemies,)
-	pipe_top = sprites.Pipe((550, checkpoint.rect.top - 500), 1, public.all_sprites, public.enemies,)
-	pipe_bottom = sprites.Pipe((550, checkpoint.rect.bottom), 0, public.all_sprites)
+	checkpoint = sprites.Checkpoint((550, random.randint(50, 400)), public.all_sprites, public.enemies)
+	pipe_top = sprites.Pipe((550, checkpoint.rect.top - 500), 1, public.all_sprites, public.enemies)
+	pipe_bottom = sprites.Pipe((550, checkpoint.rect.bottom), 0, public.all_sprites, public.enemies)
 
 
 def update_pipes():
@@ -32,14 +32,14 @@ def update_pipes():
 
 
 def generate_clouds():
-	for i in range(10):
+	for i in range(15):
 		state = random.randint(0, 2)
 		cloud = sprites.Cloud((random.randint(0, public.SWIDTH), random.randint(0, public.SHEIGHT)), state, public.all_sprites, public.clouds)
 		public.cloud_ticks = 0	
 
 
 def update_clouds():
-	if len(public.clouds.sprites()) < 10:
+	if len(public.clouds.sprites()) < 15:
 		state = random.randint(0, 2)
 		cloud = sprites.Cloud((550, random.randint(0, public.SHEIGHT)), state, public.all_sprites, public.clouds)
 		public.cloud_ticks = 0
