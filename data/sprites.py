@@ -12,8 +12,6 @@ vels = {
 	0: 0.2,
 	1: 0.3,
 	2: 0.7,
-	3: 0.9,
-	4: 1
 }
 
 class Cloud(pygame.sprite.Sprite):
@@ -24,7 +22,7 @@ class Cloud(pygame.sprite.Sprite):
 		self.rect = self.image.get_rect(center=pos)
 		self.pos = pygame.math.Vector2(pos)
 		self.vel = vels[state] 
-		self.type = 0
+		self.type = state - 4
 
 	def update(self):
 		self.pos.x -= self.vel
@@ -76,9 +74,10 @@ class Flappe(pygame.sprite.Sprite):
 						public.gravity = 0.2
 
 				elif sprite.type == 4:
-					sprite.kill()
-					public.points += 1
-					print(public.points)
+					if self.pos.x > sprite.rect.center[0]:
+						sprite.kill()
+						public.points += 1
+						print(public.points)
 
 	def draw(self):
 		public.screen.blit(self.image, self.rect)

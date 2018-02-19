@@ -33,12 +33,13 @@ def update_pipes():
 
 def generate_clouds():
 	for i in range(10):
-		state = random.randint(0, 4)
+		state = random.randint(0, 2)
 		cloud = sprites.Cloud((random.randint(0, public.SWIDTH), random.randint(0, public.SHEIGHT)), state, public.all_sprites, public.clouds)
 		public.cloud_ticks = 0	
 
+
 def update_clouds():
 	if len(public.clouds.sprites()) < 10:
-		state = random.randint(0, 4)
+		state = random.randint(0, 2)
 		cloud = sprites.Cloud((550, random.randint(0, public.SHEIGHT)), state, public.all_sprites, public.clouds)
 		public.cloud_ticks = 0
