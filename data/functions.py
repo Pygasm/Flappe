@@ -48,11 +48,13 @@ def update_clouds():
 def update_states():
 	if public.points % 50 == 0 and public.points != 0 and not public.is_ran:
 		public.state_index = (public.state_index + 1) % len(public.states)
-		public.tick_limit -= 1
 		public.is_ran = True
 
 	elif public.points % 50 != 0:
 		public.is_ran = False
+
+	if public.countercolor != (255, 255, 255):
+		public.countercolor = (public.countercolor[0] + 5, public.countercolor[1], public.countercolor[2] + 5)
 
 	if public.skycolor != public.colors[public.states[public.state_index]]:
 		one = (public.skycolor[0] - public.colors[public.states[public.state_index]][0])

@@ -2,6 +2,7 @@ import pygame
 import data.public as public
 import data.sprites as sprites
 import data.functions as functions
+import data.media as media
 
 pygame.display.set_caption('Flappe')
 
@@ -12,7 +13,7 @@ def main():
 
 	functions.generate_floors()
 	functions.generate_pipes()
-	functions.generate_clouds()
+	functions.generate_states()
 
 	while True:
 		for event in pygame.event.get():
@@ -26,11 +27,11 @@ def main():
 		functions.update_pipes()
 		functions.update_clouds()
 		functions.update_states()
-		counter = public.font.render(str(public.points), True, public.WHITE)
 		public.all_sprites.update()
 
 		public.screen.fill(public.skycolor)
 
+		counter = public.font.render(str(public.points), True, public.countercolor)
 		l = sorted(public.all_sprites.sprites(), key=lambda x: x.type)
 		for sprite in l:
 			sprite.draw()

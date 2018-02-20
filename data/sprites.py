@@ -8,11 +8,7 @@ import data.media as media
 # 3: Floors
 # 4: Checkpoints (Not drawn)
 
-vels = {
-	0: 0.2,
-	1: 0.5,
-	2: 0.9,
-}
+vels = {0: 0.2, 1: 0.5, 2: 0.9}
 
 
 class Cloud(pygame.sprite.Sprite):
@@ -64,6 +60,7 @@ class Flappe(pygame.sprite.Sprite):
 				if sprite.type == 2 or sprite.type == 3:
 					if sprite.state == 1 or (self.pos.x < sprite.rect.left and sprite.type == 2):
 						self.vel.y = 0
+						
 					elif sprite.state == 0:
 						self.vel.y = -2
 
@@ -75,6 +72,7 @@ class Flappe(pygame.sprite.Sprite):
 				elif sprite.type == 4:
 					sprite.kill()
 					public.points += 1
+					public.countercolor = (100, 255, 100)
 					media.MEDIA['pass_sound'].play()
 
 	def draw(self):
