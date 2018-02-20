@@ -25,15 +25,17 @@ def main():
 		functions.update_floors()
 		functions.update_pipes()
 		functions.update_clouds()
+		functions.update_states()
 		counter = public.font.render(str(public.points), True, public.WHITE)
 		public.all_sprites.update()
 
-		public.screen.fill(public.BLUE)
+		public.screen.fill(public.skycolor)
 
 		l = sorted(public.all_sprites.sprites(), key=lambda x: x.type)
 		for sprite in l:
 			sprite.draw()
-		public.screen.blit(counter, ((public.SWIDTH / 2) - counter.get_width() // 2, 20 - counter.get_height() // 2))
+
+		public.screen.blit(counter, ((public.SWIDTH / 2) - counter.get_width() // 2, 18 - counter.get_height() // 2))
 
 		pygame.display.flip()
 		public.clock.tick(public.FPS)

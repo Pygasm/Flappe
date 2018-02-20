@@ -62,7 +62,7 @@ class Flappe(pygame.sprite.Sprite):
 		if not self.toggle:
 			for sprite in collided:
 				if sprite.type == 2 or sprite.type == 3:
-					if sprite.state == 1 or self.pos.x < sprite.rect.left:
+					if sprite.state == 1 or (self.pos.x < sprite.rect.left and sprite.type == 2):
 						self.vel.y = 0
 					elif sprite.state == 0:
 						self.vel.y = -2
