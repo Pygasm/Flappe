@@ -79,6 +79,7 @@ class Flappe(pygame.sprite.Sprite):
 
                 elif sprite.type == 4:
                     public.score += 1
+                    public.txtcolor = (75, 255, 75)
                     sprite.kill()
                     media.MEDIA['pass_sound'].play()
 

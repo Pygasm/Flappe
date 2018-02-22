@@ -24,10 +24,10 @@ def generate_floors():
 def update_floors():
     if len(public.floors.sprites()) < 4:
         ft = sprites.Floor(
-             ((public.SWIDTH * 2) - 1, 0), 1,
+             ((public.SWIDTH * 2) - 2, 0), 1,
              public.all_sprites, public.enemies, public.floors)
         fb = sprites.Floor(
-            ((public.SWIDTH * 2) - 1, 550), 0,
+            ((public.SWIDTH * 2) - 2, 550), 0,
             public.all_sprites, public.enemies, public.floors)
 
 
@@ -87,10 +87,10 @@ def update_states():
         public.is_ran = False
 
     if public.txtcolor != (255, 255, 255):
-        public.countercolor = (
-            public.countercolor[0] + 5,
-            public.countercolor[1],
-            public.countercolor[2] + 5)
+        public.txtcolor = (
+            public.txtcolor[0] + 5,
+            public.txtcolor[1],
+            public.txtcolor[2] + 5)
 
     elif public.skycolor != public.states['Curr']:
         one = (public.skycolor[0] - public.states['Curr'][0])
