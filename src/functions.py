@@ -48,7 +48,8 @@ def generate_pipes():
 def update_pipes():
     public.pipe_ticks += 1
 
-    if public.pipe_ticks == public.pipe_limit:
+    if public.pipe_ticks == public.pipe_limit and \
+            public.obstacle_velocity != 0:
         generate_pipes()
         public.pipe_ticks = 0
 

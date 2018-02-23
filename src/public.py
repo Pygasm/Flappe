@@ -28,13 +28,20 @@ states = {
     'Night': (0, 1, 50),
     'Dawn': (200, 144, 0),
     'Curr': (64, 130, 254)}
+fonts = {
+    'small': pygame.font.Font(
+        os.path.join(os.path.dirname(__file__), 'res', 'flappe_text.ttf'),
+        20),
+    'normal': pygame.font.Font(
+        os.path.join(os.path.dirname(__file__), 'res', 'flappe_text.ttf'),
+        40),
+    'large': pygame.font.Font(
+        os.path.join(os.path.dirname(__file__), 'res', 'flappe_text.ttf'),
+        100)}
 
-# Object
+# Objects
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((SWIDTH, SHEIGHT))
-font = pygame.font.Font(
-    os.path.join(os.path.dirname(__file__), 'res', 'flappe_text.ttf'),
-    40)
 all_sprites = pygame.sprite.Group()
 enemies = pygame.sprite.Group()
 floors = pygame.sprite.Group()
