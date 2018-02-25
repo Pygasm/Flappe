@@ -82,6 +82,9 @@ def update_states():
         public.states['Curr'] = public.states[
             list(public.states.keys())[public.state_index]]
 
+        if public.score % 200 == 0:
+            public.pipe_limit -= 1
+
         public.is_ran = True
 
     elif public.score % 50 != 0:

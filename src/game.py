@@ -7,47 +7,60 @@ import functions
 pygame.display.set_caption('Flappe')
 
 
+# Title screen
 def title():
-    title = public.fonts['large'].render('Flappe', True, public.WHITE)
+    # Define
     functions.generate_clouds()
     functions.generate_floors()
 
+    title = public.fonts['large'].render('Flappe', True, public.YELLOW)
+
+    # Loop
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return 1
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    game()
-                    return 1
+                game()
+                return 1
 
+        # Logic
         functions.update_clouds()
         functions.update_floors()
         public.all_sprites.update()
 
-        public.screen.fill(public.skycolor)
-        public.all_sprites.draw(public.screen)
-        public.screen.blit(title, (97, 50))
+        sorted_sprites = sorted(
+            public.all_sprites.sprites(), key=lambda x: x.type)
 
+        # Draw
+        public.screen.fill(public.skycolor)
+
+        for sprite in sorted_sprites:
+            sprite.draw()
+        public.screen.blit(title, (97, 150))
+        public.screen.blit(media.MEDIA['menu_texture'], (189, 350))
         pygame.display.flip()
         public.clock.tick(60)
 
 
 def game():
+    # Define
     functions.generate_pipes()
 
     flappe = sprites.Flappe(public.all_sprites)
     text = public.fonts['normal'].render(
         str(public.score), True, public.txtcolor)
 
+    # Loop
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return 1
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE and not flappe.toggle:
                     flappe.flap()
 
+        # Update
         functions.update_clouds()
         functions.update_pipes()
         functions.update_floors()
@@ -59,6 +72,7 @@ def game():
         sorted_sprites = sorted(
             public.all_sprites.sprites(), key=lambda x: x.type)
 
+        # Drawing
         public.screen.fill(public.skycolor)
 
         for sprite in sorted_sprites:
