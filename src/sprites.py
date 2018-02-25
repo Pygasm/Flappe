@@ -7,7 +7,6 @@ import media
 # 2: Pipes
 # 3: Floors
 # 4: Checkpoints (Not drawn)
-# 5: Mouse
 
 vels = {0: 0.2, 1: 0.5, 2: 0.9}
 

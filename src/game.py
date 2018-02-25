@@ -14,19 +14,22 @@ def title():
     functions.generate_floors()
 
     title = public.fonts['large'].render('Flappe', True, public.YELLOW)
+    public.menu_surf = media.MEDIA['menu_texture']
 
     # Loop
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return 1
-            elif event.type == pygame.KEYDOWN:
-                game()
-                return 1
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if public.menu_rects['Play'].collidepoint(event.pos):
+                    game()
+                    return 1
 
         # Logic
         functions.update_clouds()
         functions.update_floors()
+        functions.update_menu()
         public.all_sprites.update()
 
         sorted_sprites = sorted(
@@ -38,7 +41,7 @@ def title():
         for sprite in sorted_sprites:
             sprite.draw()
         public.screen.blit(title, (97, 150))
-        public.screen.blit(media.MEDIA['menu_texture'], (189, 350))
+        public.screen.blit(public.menu_surf, (155, 350))
         pygame.display.flip()
         public.clock.tick(60)
 

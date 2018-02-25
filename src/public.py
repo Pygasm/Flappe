@@ -39,6 +39,8 @@ fonts = {
     'large': pygame.font.Font(
         os.path.join(os.path.dirname(__file__), 'res', 'flappe_font.ttf'),
         100)}
+menu_rects = {
+    'Play': pygame.Rect(160, 355, 50, 50)}
 
 # Objects
 clock = pygame.time.Clock()
@@ -47,3 +49,4 @@ all_sprites = pygame.sprite.Group()
 enemies = pygame.sprite.Group()
 floors = pygame.sprite.Group()
 clouds = pygame.sprite.Group()
+menu_surf = None

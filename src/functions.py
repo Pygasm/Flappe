@@ -2,6 +2,7 @@ import pygame
 import random
 import public
 import sprites
+import media
 
 
 # Generating Floors at beginning
@@ -139,3 +140,13 @@ def update_states():
                     public.skycolor[0],
                     public.skycolor[1],
                     public.skycolor[2] - 1)
+
+
+def update_menu():
+    pos = pygame.mouse.get_pos()
+
+    if public.menu_rects['Play'].collidepoint(pos):
+        public.menu_surf = media.MEDIA['menu_playactive_texture']
+
+    else:
+        public.menu_surf = media.MEDIA['menu_texture']
