@@ -70,9 +70,17 @@ class Flappe(pygame.sprite.Sprite):
                     elif sprite.state == 0:
                         self.vel.y = -2
 
+                    if public.score > public.high_score:
+                        public.hs_surf = media.MEDIA['newhs_texture']
+                        public.high_score = public.score
+                    elif public.score <= public.high_score:
+                        public.hs_surf = pygame.Surface(
+                            (100, 20), pygame.SRCALPHA, 32)
+
                     public.gravity = 0.2
                     public.obstacle_velocity = 0
                     self.toggle = True
+
 
                     media.MEDIA['fall_sound'].play()
 

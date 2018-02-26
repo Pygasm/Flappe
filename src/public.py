@@ -1,5 +1,6 @@
 import pygame
 import os
+
 pygame.init()
 
 # Constants
@@ -42,9 +43,9 @@ fonts = {
         100),
     'plain': pygame.font.Font(None, 30)}
 menu_rects = {
-    'Play': pygame.Rect(160, 355, 50, 50),
-    'GO_Playagain': pygame.Rect(348, 297, 50, 50),
-    'GO_Exit': pygame.Rect(408, 297, 50, 50)}
+    'tt_play': pygame.Rect(160, 355, 50, 50),
+    'go_playagain': pygame.Rect(160, 353, 50, 50),
+    'go_exit': pygame.Rect(220, 353, 50, 50)}
 
 # Objects
 clock = pygame.time.Clock()
@@ -56,3 +57,4 @@ clouds = pygame.sprite.Group()
 pipes = pygame.sprite.Group()
 menu_surf = None
 gomenu_surf = None
+hs_surf = None

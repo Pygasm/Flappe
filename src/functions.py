@@ -1,16 +1,16 @@
 import pygame
+import pickle
 import random
+import os
 import public
 import sprites
 import media
 
 
-# Game setup
-def setup():
-    for sprite in public.all_sprites:
-        if sprite.type == 2 or sprite.type == 4:
-            sprite.kill()
-
+# Game setup at beginning/restart
+def game_setup():
+    for pipe in public.pipes.sprites():
+        pipe.kill()
     public.obstacle_velocity = 3
     public.gravity = 0.1
     public.score = 0
@@ -19,6 +19,7 @@ def setup():
 
 # Generating Floors at beginning
 def generate_floors():
+    public.floors.empty()
     ft1 = sprites.Floor(
         (public.SWIDTH, 0), 1,
         public.all_sprites, public.enemies, public.floors)
@@ -157,15 +158,28 @@ def update_states():
 def update_menu():
     pos = pygame.mouse.get_pos()
 
-    if public.menu_rects['Play'].collidepoint(pos):
-        public.menu_surf = media.MEDIA['menu_playactive_texture']
+    if public.menu_rects['tt_play'].collidepoint(pos):
+        public.menu_surf = media.MEDIA['tt_menu1_texture']
 
     else:
-        public.menu_surf = media.MEDIA['menu_texture']
+        public.menu_surf = media.MEDIA['tt_menu0_texture']
 
-    if public.menu_rects['GO_Playagain'].collidepoint(pos):
-        public.gomenu_surf = media.MEDIA['gameover_menu_playactive_texture']
-    elif public.menu_rects['GO_Exit'].collidepoint(pos):
-        public.gomenu_surf = media.MEDIA['gameover_menu_exitactive_texture']
+    if public.menu_rects['go_playagain'].collidepoint(pos):
+        public.gomenu_surf = media.MEDIA['go_menu1_texture']
+
+    elif public.menu_rects['go_exit'].collidepoint(pos):
+        public.gomenu_surf = media.MEDIA['go_menu2_texture']
+
     else:
-        public.gomenu_surf = media.MEDIA['gameover_menu_texture']
+        public.gomenu_surf = media.MEDIA['go_menu0_texture']
+
+
+def load_hs():
+    public.high_score = pickle.load(
+        open(os.path.join(os.path.dirname(__file__), 'res', 'hs.dat'), 'rb'))
+
+
+def dump_hs():
+    pickle.dump(
+        int(public.high_score), open(
+            os.path.join(os.path.dirname(__file__), 'res', 'hs.dat'), 'wb'))
