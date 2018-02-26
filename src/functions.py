@@ -5,6 +5,18 @@ import sprites
 import media
 
 
+# Game setup
+def setup():
+    for sprite in public.all_sprites:
+        if sprite.type == 2 or sprite.type == 4:
+            sprite.kill()
+
+    public.obstacle_velocity = 3
+    public.gravity = 0.1
+    public.score = 0
+    public.pipe_ticks = 0
+
+
 # Generating Floors at beginning
 def generate_floors():
     ft1 = sprites.Floor(
@@ -35,14 +47,14 @@ def update_floors():
 # Generating pipes at beginning
 def generate_pipes():
     checkpoint = sprites.Checkpoint(
-        (550, random.randint(50, 400)), public.all_sprites, public.enemies
-        )
+        (550, random.randint(50, 400)), public.all_sprites, public.enemies,
+        public.pipes)
     pipe_top = sprites.Pipe(
-        (550, checkpoint.rect.top - 500), 1, public.all_sprites, public.enemies
-        )
+        (550, checkpoint.rect.top - 500), 1, public.all_sprites,
+        public.enemies, public.pipes)
     pipe_top = sprites.Pipe(
-        (550, checkpoint.rect.bottom), 0, public.all_sprites, public.enemies
-        )
+        (550, checkpoint.rect.bottom), 0, public.all_sprites,
+        public.enemies, public.pipes)
 
 
 # Updating pipes in game loop
@@ -150,3 +162,10 @@ def update_menu():
 
     else:
         public.menu_surf = media.MEDIA['menu_texture']
+
+    if public.menu_rects['GO_Playagain'].collidepoint(pos):
+        public.gomenu_surf = media.MEDIA['gameover_menu_playactive_texture']
+    elif public.menu_rects['GO_Exit'].collidepoint(pos):
+        public.gomenu_surf = media.MEDIA['gameover_menu_exitactive_texture']
+    else:
+        public.gomenu_surf = media.MEDIA['gameover_menu_texture']

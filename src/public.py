@@ -14,6 +14,7 @@ gravity = 0.1
 pipe_ticks = 0
 pipe_limit = 125
 score = 0
+high_score = 0
 obstacle_velocity = 3
 state_index = 0
 
@@ -38,9 +39,12 @@ fonts = {
         40),
     'large': pygame.font.Font(
         os.path.join(os.path.dirname(__file__), 'res', 'flappe_font.ttf'),
-        100)}
+        100),
+    'plain': pygame.font.Font(None, 30)}
 menu_rects = {
-    'Play': pygame.Rect(160, 355, 50, 50)}
+    'Play': pygame.Rect(160, 355, 50, 50),
+    'GO_Playagain': pygame.Rect(348, 297, 50, 50),
+    'GO_Exit': pygame.Rect(408, 297, 50, 50)}
 
 # Objects
 clock = pygame.time.Clock()
@@ -49,4 +53,6 @@ all_sprites = pygame.sprite.Group()
 enemies = pygame.sprite.Group()
 floors = pygame.sprite.Group()
 clouds = pygame.sprite.Group()
+pipes = pygame.sprite.Group()
 menu_surf = None
+gomenu_surf = None
