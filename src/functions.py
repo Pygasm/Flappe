@@ -9,8 +9,10 @@ import media
 
 # Game setup at beginning/restart
 def game_setup():
-    for pipe in public.pipes.sprites():
-        pipe.kill()
+    for sprite in public.all_sprites.sprites():
+        if sprite.type == 2 or sprite.type == 4 or sprite.type == 5:
+            sprite.kill()
+
     public.obstacle_velocity = 3
     public.gravity = 0.1
     public.score = 0
@@ -48,14 +50,13 @@ def update_floors():
 # Generating pipes at beginning
 def generate_pipes():
     checkpoint = sprites.Checkpoint(
-        (550, random.randint(50, 400)), public.all_sprites, public.enemies,
-        public.pipes)
+        (550, random.randint(50, 400)), public.all_sprites, public.enemies)
     pipe_top = sprites.Pipe(
         (550, checkpoint.rect.top - 500), 1, public.all_sprites,
-        public.enemies, public.pipes)
+        public.enemies)
     pipe_top = sprites.Pipe(
         (550, checkpoint.rect.bottom), 0, public.all_sprites,
-        public.enemies, public.pipes)
+        public.enemies)
 
 
 # Updating pipes in game loop
@@ -155,25 +156,6 @@ def update_states():
                     public.skycolor[2] - 1)
 
 
-def update_menu():
-    pos = pygame.mouse.get_pos()
-
-    if public.menu_rects['tt_play'].collidepoint(pos):
-        public.menu_surf = media.MEDIA['tt_menu1_texture']
-
-    else:
-        public.menu_surf = media.MEDIA['tt_menu0_texture']
-
-    if public.menu_rects['go_playagain'].collidepoint(pos):
-        public.gomenu_surf = media.MEDIA['go_menu1_texture']
-
-    elif public.menu_rects['go_exit'].collidepoint(pos):
-        public.gomenu_surf = media.MEDIA['go_menu2_texture']
-
-    else:
-        public.gomenu_surf = media.MEDIA['go_menu0_texture']
-
-
 def load_hs():
     public.high_score = pickle.load(
         open(os.path.join(os.path.dirname(__file__), 'res', 'hs.dat'), 'rb'))
@@ -181,5 +163,5 @@ def load_hs():
 
 def dump_hs():
     pickle.dump(
-        int(public.high_score), open(
+        0, open(
             os.path.join(os.path.dirname(__file__), 'res', 'hs.dat'), 'wb'))

@@ -7,6 +7,7 @@ import media
 # 2: Pipes
 # 3: Floors
 # 4: Checkpoints (Not drawn)
+# 5: Buttons
 
 vels = {0: 0.2, 1: 0.5, 2: 0.9}
 
@@ -73,14 +74,10 @@ class Flappe(pygame.sprite.Sprite):
                     if public.score > public.high_score:
                         public.hs_surf = media.MEDIA['newhs_texture']
                         public.high_score = public.score
-                    elif public.score <= public.high_score:
-                        public.hs_surf = pygame.Surface(
-                            (100, 20), pygame.SRCALPHA, 32)
 
                     public.gravity = 0.2
                     public.obstacle_velocity = 0
                     self.toggle = True
-
 
                     media.MEDIA['fall_sound'].play()
 
@@ -171,3 +168,29 @@ class Checkpoint(pygame.sprite.Sprite):
 
     def draw(self):
         pass
+
+
+class Button(pygame.sprite.Sprite):
+    def __init__(self, surf, psurf, rect, prect, *groups):
+        super().__init__(*groups)
+        self.image = surf
+        self.normal_image = surf
+        self.pressed_image = psurf
+        self.rect = rect
+        self.normal_rect = rect
+        self.pressed_rect = prect
+        self.type = 5
+
+    def update(self):
+        pos = pygame.mouse.get_pos()
+
+        if self.rect.collidepoint(pos):
+            self.image = self.pressed_image
+            self.rect = self.pressed_rect
+
+        else:
+            self.image = self.normal_image
+            self.rect = self.normal_rect
+
+    def draw(self):
+        public.screen.blit(self.image, self.rect)

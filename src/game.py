@@ -9,18 +9,25 @@ import os
 pygame.display.set_caption('Flappe')
 pygame.display.set_icon(media.MEDIA['icon_texture'])
 
+functions.load_hs()
+functions.generate_clouds()
+functions.generate_floors()
+
 
 # Title screen
 def title():
     # Define
-    functions.load_hs()
-    functions.generate_clouds()
-    functions.generate_floors()
+    functions.game_setup()
 
     title = public.fonts['large'].render('Flappe', True, public.YELLOW)
     hs_text = public.fonts['plain'].render(
         'High score: ' + str(public.high_score), True, public.YELLOW)
-    public.menu_surf = media.MEDIA['tt_menu0_texture']
+    play_btn = sprites.Button(
+        media.MEDIA['play_normal_texture'],
+        media.MEDIA['play_pressed_texture'],
+        public.menu_rects['tt_play'],
+        public.menu_rects['tt_play_pressed'],
+        public.all_sprites)
 
     # Loop
     while True:
@@ -36,7 +43,6 @@ def title():
         # Logic
         functions.update_clouds()
         functions.update_floors()
-        functions.update_menu()
         public.all_sprites.update()
 
         sorted_sprites = sorted(
@@ -48,10 +54,9 @@ def title():
         for sprite in sorted_sprites:
             sprite.draw()
         public.screen.blit(title, (97, 150))
-        public.screen.blit(public.menu_surf, (155, 350))
         public.screen.blit(hs_text, (
             (public.SWIDTH / 2) - hs_text.get_width() // 2, 290))
-        
+
         pygame.display.flip()
         public.clock.tick(60)
 
@@ -110,6 +115,24 @@ def gameover():
         'Game Over', True, public.YELLOW)
     score_text = public.fonts['plain'].render(
         'Score: ' + str(public.score), True, public.YELLOW)
+    playagain_btn = sprites.Button(
+        media.MEDIA['playagain_normal_texture'],
+        media.MEDIA['playagain_pressed_texture'],
+        public.menu_rects['go_playagain'],
+        public.menu_rects['go_playagain_pressed'],
+        public.all_sprites)
+    title_btn = sprites.Button(
+        media.MEDIA['title_normal_texture'],
+        media.MEDIA['title_pressed_texture'],
+        public.menu_rects['go_title'],
+        public.menu_rects['go_title_pressed'],
+        public.all_sprites)
+    exit_btn = sprites.Button(
+        media.MEDIA['exit_normal_texture'],
+        media.MEDIA['exit_pressed_texture'],
+        public.menu_rects['go_exit'],
+        public.menu_rects['go_exit_pressed'],
+        public.all_sprites)
 
     # Loop
     while True:
@@ -123,6 +146,11 @@ def gameover():
                     functions.generate_floors()
                     game()
                     return 1
+
+                elif public.menu_rects['go_title'].collidepoint(event.pos):
+                    title()
+                    return 1
+
                 elif public.menu_rects['go_exit'].collidepoint(event.pos):
                     functions.dump_hs()
                     return 1
@@ -130,7 +158,6 @@ def gameover():
         # Logic
         functions.update_clouds()
         functions.update_floors()
-        functions.update_menu()
         public.all_sprites.update()
 
         sorted_sprites = sorted(
@@ -144,7 +171,6 @@ def gameover():
 
         public.screen.blit(gameover_title, (19, 150))
         public.screen.blit(public.hs_surf, (185, 305))
-        public.screen.blit(public.gomenu_surf, (155, 350))
         public.screen.blit(score_text, (
             (public.SWIDTH / 2) - score_text.get_width() // 2, 270))
 

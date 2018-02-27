@@ -43,9 +43,14 @@ fonts = {
         100),
     'plain': pygame.font.Font(None, 30)}
 menu_rects = {
-    'tt_play': pygame.Rect(160, 355, 50, 50),
-    'go_playagain': pygame.Rect(160, 353, 50, 50),
-    'go_exit': pygame.Rect(220, 353, 50, 50)}
+    'tt_play': pygame.Rect(160, 353, 50, 55),
+    'tt_play_pressed': pygame.Rect(160, 356, 50, 52),
+    'go_playagain': pygame.Rect(160, 353, 50, 55),
+    'go_playagain_pressed': pygame.Rect(160, 356, 50, 52),
+    'go_title': pygame.Rect(215, 353, 50, 55),
+    'go_title_pressed': pygame.Rect(215, 356, 50, 52),
+    'go_exit': pygame.Rect(270, 353, 50, 55),
+    'go_exit_pressed': pygame.Rect(270, 356, 50, 52)}
 
 # Objects
 clock = pygame.time.Clock()
@@ -54,7 +59,4 @@ all_sprites = pygame.sprite.Group()
 enemies = pygame.sprite.Group()
 floors = pygame.sprite.Group()
 clouds = pygame.sprite.Group()
-pipes = pygame.sprite.Group()
-menu_surf = None
-gomenu_surf = None
-hs_surf = None
+hs_surf = pygame.Surface((100, 20), pygame.SRCALPHA, 32)
