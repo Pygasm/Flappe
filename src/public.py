@@ -43,8 +43,10 @@ fonts = {
         100),
     'plain': pygame.font.Font(None, 30)}
 menu_rects = {
-    'tt_play': pygame.Rect(160, 353, 50, 55),
-    'tt_play_pressed': pygame.Rect(160, 356, 50, 52),
+    'tt_play': pygame.Rect(188.5, 356, 50, 55),
+    'tt_play_pressed': pygame.Rect(188.5, 359, 50, 52),
+    'tt_settings': pygame.Rect(243.5, 356, 50, 55),
+    'tt_settings_pressed': pygame.Rect(243.5, 359, 50, 55),
     'go_playagain': pygame.Rect(160, 353, 50, 55),
     'go_playagain_pressed': pygame.Rect(160, 356, 50, 52),
     'go_title': pygame.Rect(215, 353, 50, 55),

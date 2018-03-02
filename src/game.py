@@ -17,7 +17,7 @@ functions.generate_floors()
 # Title screen
 def title():
     # Define
-    functions.game_setup()
+    functions.setup()
 
     title = public.fonts['large'].render('Flappe', True, public.YELLOW)
     hs_text = public.fonts['plain'].render(
@@ -27,6 +27,12 @@ def title():
         media.MEDIA['play_pressed_texture'],
         public.menu_rects['tt_play'],
         public.menu_rects['tt_play_pressed'],
+        public.all_sprites)
+    settings_btn = sprites.Button(
+        media.MEDIA['play_normal_texture'],
+        media.MEDIA['play_pressed_texture'],
+        public.menu_rects['tt_settings'],
+        public.menu_rects['tt_settings_pressed'],
         public.all_sprites)
 
     # Loop
@@ -64,7 +70,7 @@ def title():
 # Main game
 def game():
     # Define
-    functions.game_setup()
+    functions.setup()
     functions.generate_pipes()
 
     flappe = sprites.Flappe(public.all_sprites)

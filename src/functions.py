@@ -8,7 +8,7 @@ import media
 
 
 # Game setup at beginning/restart
-def game_setup():
+def setup():
     for sprite in public.all_sprites.sprites():
         if sprite.type == 2 or sprite.type == 4 or sprite.type == 5:
             sprite.kill()
@@ -17,6 +17,7 @@ def game_setup():
     public.gravity = 0.1
     public.score = 0
     public.pipe_ticks = 0
+    public.hs_surf = pygame.Surface((100, 20), pygame.SRCALPHA, 32)
 
 
 # Generating Floors at beginning
@@ -163,5 +164,5 @@ def load_hs():
 
 def dump_hs():
     pickle.dump(
-        0, open(
+        public.high_score, open(
             os.path.join(os.path.dirname(__file__), 'res', 'hs.dat'), 'wb'))

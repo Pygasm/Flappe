@@ -174,23 +174,19 @@ class Button(pygame.sprite.Sprite):
     def __init__(self, surf, psurf, rect, prect, *groups):
         super().__init__(*groups)
         self.image = surf
-        self.normal_image = surf
-        self.pressed_image = psurf
         self.rect = rect
-        self.normal_rect = rect
-        self.pressed_rect = prect
+        self.normal = [surf, rect]
+        self.pressed = [psurf, prect]
         self.type = 5
 
     def update(self):
         pos = pygame.mouse.get_pos()
 
         if self.rect.collidepoint(pos):
-            self.image = self.pressed_image
-            self.rect = self.pressed_rect
+            self.image, self.rect = self.pressed
 
         else:
-            self.image = self.normal_image
-            self.rect = self.normal_rect
+            self.image, self.rect = self.normal
 
     def draw(self):
         public.screen.blit(self.image, self.rect)
