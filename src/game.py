@@ -64,7 +64,7 @@ def title():
             (public.SWIDTH / 2) - hs_text.get_width() // 2, 290))
 
         pygame.display.flip()
-        public.clock.tick(60)
+        public.clock.tick(public.FPS)
 
 
 # Main game
@@ -112,7 +112,7 @@ def game():
             (public.SWIDTH / 2) - counter.get_width() // 2, -7))
 
         pygame.display.flip()
-        public.clock.tick(60)
+        public.clock.tick(public.FPS)
 
 
 # End screen
@@ -181,4 +181,4 @@ def gameover():
             (public.SWIDTH / 2) - score_text.get_width() // 2, 270))
 
         pygame.display.flip()
-        public.clock.tick(60)
+        public.clock.tick(public.FPS)

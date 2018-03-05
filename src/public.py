@@ -7,6 +7,7 @@ pygame.init()
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 YELLOW = (255, 216, 0)
+FPS = 75
 SWIDTH = 480
 SHEIGHT = 600
 
