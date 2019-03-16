@@ -1,12 +1,5 @@
-![Flappe](https://i.imgur.com/D1sdY3I.png)
+# Flappe
 
-Flappy bird clone I created for fun.
+Joke project I created solely out of boredom.
 
-Comes with basic mechanics and high score system.
-
-Settings coming whenever I want to.
-
-![Game1](https://i.imgur.com/7KlCSIL.png)
-
-![Game2](https://i.imgur.com/Y5O7xgC.png)
-
+The most barebones flappy bird clone you could feasibly get.
